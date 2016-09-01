@@ -1,0 +1,299 @@
+<!-- some useful tips about java learning -->
+<html>
+<head>
+	<meta charset="utf-8">
+    <script src="jquery.min.js"></script>
+	<style>
+        body {
+            font-family: "Microsoft YaHei UI", "serif";
+        }
+        .h1 {
+            margin: 5px 10px;
+            padding: 10px 10px;
+            background: #bcbfff;
+            font-size: x-large;
+        }
+		div div{
+            margin: 5px 10px;
+            padding: 5px 10px;
+            background: #d1faff;
+            font-size: large;
+		}
+		div div div{
+            margin: 3px 20px;
+            padding: 0 3px;
+            background: #e3ffdc;
+            font-size: medium;
+		}
+		div div div div{
+            margin: 2px 30px;
+            background: #ffeeb8;
+            font-size:small;
+		}
+        div div div div div{
+            margin: 1px 40px;
+            background: #ffd2ef;
+        }
+        .hidden{
+             display:none;
+         }
+
+	</style>
+    <script>
+        $(document).ready(function () {
+            $('div').each(function(){
+                $(this).click(function(){
+                    event.stopPropagation();
+                    var content = $(this).next('div');
+                    if(content.children().get(0)){
+                        if(content.hasClass("hidden")){
+                            content.removeClass("hidden");
+                            content.addClass("show");
+                        } else {
+                            content.removeClass("show");
+                            content.addClass("hidden");
+                        }
+                    }
+                });
+                $(this).click();
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="h1">操作系统</div>
+<div>
+    <div>Linux</div>
+    <div>
+        <div>查找进程	    ps -e | grep xxx</div>
+        <div>杀死进程	    kill -9 pid</div>
+        <div>后台运行	    & nohup</div>
+    </div>
+    <div>Windows</div>
+    <div>
+        <div>注意网络映射是否可用。</div>
+    </div>
+</div>
+<div class="h1">中间件</div>
+<div>
+    <div>WebLogic</div>
+    <div>
+        <div>console中可以配置日志保存至文件</div>
+        <div>生产模式启动需要配置用户名密码到servers\AdminServer\security\boot.properties中，否则需要手动输入</div>
+        <div>建域可以调整端口</div>
+        <div>setEnv 调整启动参数</div>
+        <div>可以配置JMX监控，对应的jmxremote.password，jmxremote.access需要仅本用户有权限</div>
+        <div>自带大量jar包，如JDBC并不使用web下的版本。</div>
+    </div>
+
+    <div>Tomcat</div>
+    <div>
+        <div>调整线程和内存</div>
+        <div>复制到webapp下面即可启动项目</div>
+        <div>conf/server.xml里面配置</div>
+        <div>如报错信息不够分析应用启动问题所在，可以开启Tomcat的debug模式。</div>
+        <div>tomcat的缓存目录为work/Catalina，不要删除work目录</div>
+    </div>
+
+    <div>TongWeb（东方通）</div>
+    <div>
+        <div>配置twns.xml</div>
+        <div>清除缓存需要点击重部署</div>
+    </div>
+
+    <div>TAS</div>
+</div>
+
+<div class="h1">编码</div>
+<div>
+	<div>原则</div>
+    <div>
+		<div>路径使用contextPath替代硬编码</div>
+    </div>
+
+	<div>HTML</div>
+    <div>
+		<div>&lt;html&gt;头部标签兼容性问题，XHTML与ckeditor有冲突</div>
+		<div>disabled的表单无法提交到后台</div>
+    </div>
+
+	<div>CSS</div>
+    <div>
+		<div>注意style覆盖的顺序</div>
+		<div>block类居中margin: 0 auto</div>
+    </div>
+
+	<div>JSP</div>
+    <div>
+		<div>使用c标签替代s标签</div>
+		<div>可配置是否生成换行</div>
+    </div>
+
+	<div>JavaScript</div>
+    <div>
+		<div>操作对象时需要注意对象是否存在，防止报错</div>
+
+		<div>jQuery</div>
+        <div>
+			<div>$(xx) 可以包装普通DOM结点，XML</div>
+			<div>jQuery调用方法注意拼写，如错写data为date</div>
+			<div>多次使用同样的选择器用变量cache</div>
+			<div>checked判断与勾选不可使用attr，可使用prop</div>
+        </div>
+    </div>
+
+	<div>Java</div>
+    <div>
+		<div>使用requestWrapper来覆盖request，因为request中的paramMap不可修改</div>
+    </div>
+
+	<div>JDBC</div>
+    <div>
+		<div>遇到JDBC类报错，尝试更换JDBC</div>
+    </div>
+
+	<div>Struts2</div>
+    <div>
+		<div>struts.properties中配置不使用模糊路径</div>
+		<div>返回页面则return对应的值一定要在xml中存在</div>
+		<div>使用SerletActionContext获取request等内置对象</div>
+    </div>
+
+	<div>Spring</div>
+    <div>
+		<div>xml中配置的property大小敏感，对应java中field</div>
+    </div>
+
+	<div>ibatis</div>
+    <div>
+		<div>注意类型匹配，属性匹配</div>
+		<div>尽量使用#，避免使用$，防止SQL注入</div>
+		<div>可使用&lt;resultMap&gt;映射对象，使用lobhandler（隶属Spring）直接获取大字段</div>
+		<div>使用&lt;iterate&gt;拼接in中的参数</div>
+		<div>如果select的xml没有result，则不会返回值</div>
+		<div>XML中如果存在大于小于符号，需要使用CDATA类型 &lt;![CDATA[ XXX ]]&gt;</div>
+    </div>
+
+	<div>普元</div>
+    <div>
+		<div>调整待办表需要修改服务器端对应的hibernate文件</div>
+    </div>
+
+	<div>Artery</div>
+
+	<div>Snaker</div>
+</div>
+<div class="h1">数据库</div>
+<div>
+	<div>SQL</div>
+    <div>
+		<div>尽量使用where 1=1来提高SQL灵活性</div>
+    </div>
+
+	<div>Oracle</div>
+    <div>
+		<div>insert into select</div>
+		<div>避免使用MERGE INTO，影响SQL兼容性</div>
+		<div>exp 导出和 imp 导入</div>
+        <div>
+			<div>参数 rows=n 不导出表数据</div>
+			<div>长命令行可以使用 parfile=文件 的形式</div>
+			<div>命令行中引号需要转义 query='where domain_id=/'3/''</div>
+        </div>
+
+		<div>rownum 避免排序，注意分页写法</div>
+		<div>调用存储过程</div>
+        <div>
+			<div>
+            declare<br/>
+            &nbsp;&nbsp;test sys_refcursor<br/>
+            begin<br/>
+            &nbsp;&nbsp;light_test(test);<br/>
+            &nbsp;&nbsp;dbms_output.put_line(test);<br/>
+            end;<br/>
+            </div>
+        </div>
+    </div>
+
+	<div>达梦数据库</div>
+    <div>
+		<div>使用命令行进行导入导出，UI界面不会提示报错信息</div>
+		<div>注意大小写敏感</div>
+    </div>
+
+	<div>人大金仓</div>
+    <div>
+		<div>避免使用存储过程</div>
+    </div>
+</div>
+
+<div class="h1">工具</div>
+<div>
+	<div>MyEclipse</div>
+    <div>
+		<div>确认编译级别</div>
+		<div>配置server内存参数，避免OOM</div>
+		<div>如遇到启动逐行加载，请检查是否存在断点，如有则清除</div>
+		<div>如果不能部署web项目</div>
+        <div>
+			<div>旧版——右键---属性---MyEclipse--Web , context-root填上对应值</div>
+			<div>新版——是否存在Dynamic Web</div>
+        </div>
+    </div>
+
+	<div>PLSQL Developer</div>
+    <div>
+		<div>未安装Oracle客户端，如遇到乱码，需要配置环境变量</div>
+		<div>避免使用FOR UPDATE加悲观锁，使用rowid操作数据避免死锁。</div>
+		<div>OCI配置配合instant-client实现绿色化</div>
+		<div>可以读取network\admin\tnsnames.ora中的配置服务</div>
+		<div>多SQL使用命令窗口执行，避免SQL窗口进行编译。</div>
+		<div>如遇到执行按钮不可用，尝试重新登录</div>
+		<div>如遇到对象无法加载，尝试重新登录</div>
+    </div>
+
+	<div>PowerDesigner</div>
+    <div>
+		<div>注意生成SQL时去除外键约束</div>
+    </div>
+
+	<div>SVN</div>
+    <div>
+		<div>尽量使用新版SVN插件，.svn目录在根目录下，而旧版则分散在各个目录下</div>
+		<div>如遇到非工作目录提示，尝试进行SVN clean 或者重新 check out</div>
+    </div>
+
+	<div>Excel</div>
+    <div>
+		<div>显示A1数据在B列第几个，适用于列比较：=MATCH(A1,B:B,)</div>
+    </div>
+</div>
+
+<div class="h1">正则表达式</div>
+<div>
+	<div>可用于批量生成及替换</div>
+</div>
+
+<div class="h1">业务</div>
+<div>
+	<div>行政许可</div>
+    <div>
+		<div>回调报错</div>
+        <div>
+			<div>超时报错</div>
+            <div>
+				<div>存在网卡网络与普元服务不在同网段，如虚拟机网卡或者Wi-Fi热点</div>
+				<div>global中ip配置有误</div>
+				<div>断点超时</div>
+            </div>
+        </div>
+    </div>
+
+	<div>审评中心</div>
+    <div>
+		<div>待办表使用视图</div>
+    </div>
+</div>
+
+</body>
+</html>
