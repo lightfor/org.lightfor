@@ -1,0 +1,35 @@
+<!-- Three rows number count one average result multi version, allow multi number in one line  -->
+<html>
+<head>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript">
+		function calc(){
+			var table = $('#table');
+			table.html('');
+			var arr = $('#data').val().split('\n');
+			var ceil ;
+			var j = 0;
+			var html = '';
+			for(var i = 0; i < arr.length; i+=3){
+				if(!/^\s*$/.test(arr[i])){
+					ceil = arr[i].split('	');
+					html+='<tr>';
+					for(j = 0 ; j < ceil.length ; j++){
+						if(!/^\s*$/.test(ceil[j])){
+							html+='<td>'+( (parseFloat(arr[i].split('	')[j])+parseFloat(arr[i+1].split('	')[j])+parseFloat(arr[i+2].split('	')[j]))/3 ) + '</td>';
+						}
+					}
+					html+='</tr>';
+				}
+			}
+			table.html(html);
+		}
+	</script>
+</head>
+<body>
+	<label><textarea id="data" style="height:800px;width:500px;"></textarea></label>
+	<input type="button" onclick="calc()" value="计算"/>
+	<table id="table" style="display: inline-block;position: absolute;top: 0px;"></table>
+</body>
+</html>
