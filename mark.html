@@ -1,0 +1,43 @@
+<!-- The number less than 0.05 is marked in red. -->
+<html>
+<head>
+	<meta charset="utf-8">
+	<style type="text/css">
+		.red{
+			color:red;
+		}
+	</style>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript">
+		function fnMark(){
+			$('#result').html('');
+			var arr = $('#data').val().split('\n');
+			var ceil;
+			var i = 0;
+			var j = 0;
+			var html = '';
+			for(i = 0; i < arr.length; i++){
+				if(!/^\s*$/.test(arr[i])){
+					ceil = arr[i].split('	');
+					html+='<tr>';
+					for(j = 0 ; j < ceil.length ; j++){
+						if(!/^\s*$/.test(ceil[j])){
+							//$('#result').html($('#result').html()+( parseFloat(ceil[j])>=0.05?'<span class="red">'+ceil[j]+'</span>':ceil[j] ) + '\t');
+							html+='<td>'+( parseFloat(ceil[j])>=0.05?'<span class="red">'+ceil[j]+'</span>':ceil[j] ) + '</td>';
+						}
+					}
+					html+='</tr>';
+					//$('#result').html($('#result').html()+'<br />');
+				}
+			}
+			$('#table').html(html);
+		}
+	</script>
+</head>
+<body>
+	<lable><textarea id="data" style="height:600px;width:500px;"></textarea></lable>
+	<input type="button" onclick="fnMark()" value="标记"/>
+	<!--<div id="result" style="height:600px;width:500px;display: inline-block;position: absolute;top: 0px;border-color: red; border-width: 1px;"></div>-->
+	<table id="table" style="display: inline-block;position: absolute;top: 0px;"></table>
+</body>
+</html>
