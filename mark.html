@@ -13,10 +13,9 @@
 			$('#result').html('');
 			var arr = $('#data').val().split('\n');
 			var ceil;
-			var i = 0;
 			var j = 0;
 			var html = '';
-			for(i = 0; i < arr.length; i++){
+			for(var i = 0; i < arr.length; i++){
 				if(!/^\s*$/.test(arr[i])){
 					ceil = arr[i].split('	');
 					html+='<tr>';
