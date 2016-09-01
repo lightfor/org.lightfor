@@ -1,0 +1,62 @@
+<!-- show data that match condition -->
+<html>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+        .red {
+            color: red;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table tr td {
+            border: 1px solid gray;
+        }
+    </style>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript">
+        function fnMark() {
+            $('#result').html('');
+            var arr = $('#data').val().split('\n');
+            var ceil;
+            var j = 0;
+            var html = '';
+            var compare = $('#compare').val().trim();
+            var value = $('#value').val();
+            for (var i = 0; i < arr.length; i++) {
+                if (!/^\s*$/.test(arr[i])) {
+                    ceil = arr[i].split('	');
+                    html += '<tr>';
+                    for (j = 0; j < ceil.length; j++) {
+                        if (!/^\s*$/.test(ceil[j])) {
+                            if (compare == '<') {
+                                html += '<td>' + ( parseFloat(ceil[j]) < value ? '<span class="red">' + ceil[j] + '</span>' : ceil[j] ) + '</td>';
+                            } else if (compare == '<=') {
+                                html += '<td>' + ( parseFloat(ceil[j]) <= value ? '<span class="red">' + ceil[j] + '</span>' : ceil[j] ) + '</td>';
+                            } else if (compare == '>') {
+                                html += '<td>' + ( parseFloat(ceil[j]) > value ? '<span class="red">' + ceil[j] + '</span>' : ceil[j] ) + '</td>';
+                            } else if (compare == '>=') {
+                                html += '<td>' + ( parseFloat(ceil[j]) >= value ? '<span class="red">' + ceil[j] + '</span>' : ceil[j] ) + '</td>';
+                            }
+                        }
+                    }
+                    html += '</tr>';
+                }
+            }
+            $('#table').html(html);
+        }
+    </script>
+</head>
+<body>
+<span>
+		比较符号：<label><input id="compare" type="text" style="width: 50px;"/></label><input type="button" onclick="fnMark()" value="标记"/>
+        <br/>
+		比较数值：<label><input id="value" type="text" style="width: 50px;"/></label>
+        <br/>
+	</span>
+<label><textarea id="data" style="height:600px;width:500px;"></textarea></label>
+<table id="table" style="display: inline-block;position: absolute;top: 40px;"></table>
+</body>
+</html>
