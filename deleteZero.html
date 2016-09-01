@@ -1,0 +1,45 @@
+<!-- delete line which only contain 0  -->
+<html>
+<head>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript">
+		function calc(){
+			var table = $('#table');
+			table.html('');
+			var arr = $('#data').val().split('\n');
+			var ceil ;
+			var i;
+			var j = 0;
+			var html = '';
+			var flag = 0;
+			for(i = 0; i < arr.length; i+=3){
+				if(!/^\s*$/.test(arr[i])){
+					ceil = arr[i].split('	');
+					html+='<tr>';
+					flag = 0;
+					for(j = 0 ; j < ceil.length ; j++){
+						if(!/^\s*$/.test(ceil[j])){
+							if( ceil[j] != '0'){
+								flag = 1;
+							}
+						}
+					}
+					if(flag == 1){
+						for(j = 0 ; j < ceil.length ; j++){
+							html+='<td>'+parseFloat(ceil[j]) + '</td>';
+						}
+					}
+					html+='</tr>';
+				}
+			}
+			table.html(html);
+		}
+	</script>
+</head>
+<body>
+	<label><textarea id="data" style="height:800px;width:500px;"></textarea></label>
+	<input type="button" onclick="calc()" value="删除全0行"/>
+	<table id="table" style="display: inline-block;position: absolute;top: 0;"></table>
+</body>
+</html>
