@@ -29,4 +29,4 @@ The number less than 0.05 is marked in red.
 Transpose
 
 #video.html
-Test HTML5 video tag nad browsers' inner player.
+Test HTML5 video tag and browsers' inner player.
