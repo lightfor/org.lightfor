@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Calculate the average score</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        function fnCalc() {
+            var scores = $('#scores').val().trim().split(/[\s,\n]+/);
+            if(scores.length < 3){
+                $('#tipText').text('请输入超过三个数字！');
+                $('#tip').modal();
+                return ;
+            }
+            var max = 0;
+            var min = Infinity;
+            var expr = '0';
+            var score = '';
+            for(var i = 0 ; i < scores.length ; i++){
+                score = scores[i];
+                if(!isNaN(parseFloat(score))){
+                    if( math.chain(score).subtract(max).done() > 0){
+                        max = score;
+                    }
+                    if( math.chain(score).subtract(min).done() < 0){
+                        min = score;
+                    }
+                    expr +=  '+' + score;
+                }
+            }
+            $('#result').val(math.number(math.format(math.eval( '('+ expr + ' - ' + max + ' -  '+ min + ') / ( ' + i + ' - 2) '), {precision: 14})));
+        }
+    </script>`
+</head>
+<body>
+<div class="container theme-showcase">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="scores" class="col-sm-2 control-label">scores</label>
+            <div class="col-sm-4">
+                <textArea class="form-control" rows="3" name="scores" id="scores" placeholder="scores"></textArea>
+            </div>
+            <label for="result" class="col-sm-2 control-label">result</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="result" placeholder="result">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-6 col-sm-12">
+                <button type="button" class="btn btn-default" onclick="fnCalc()">Calc</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="tip" tabindex="-1">
+    <div class="modal-dialog modal-sm" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="tipText"></h4>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/mathjs/3.7.0/math.min.js"></script>
+</body>
+</html>
