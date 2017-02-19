@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>wage</title>
+</head>
+<body>
+    <div>
+        <label for="wage">薪水：</label>
+        <input type="text" id="wage" onkeyup="calc()"/>
+    </div>
+    <div>
+        <label for="ratio">上缴比例：</label>
+        <input type="text" id="ratio" value="100" onkeyup="calc()"/>%
+    </div>
+    <div>
+        <label for="pension">养老保险比例：</label>
+        <input type="text" id="pension" value="8"/>%
+        <label for="payPension">扣除养老保险：</label>
+        <input type="text" id="payPension"/>
+    </div>
+    <div>
+        <label for="medical">医疗保险保险比例：</label>
+        <input type="text" id="medical" value="2"/>%
+        <label for="payMedical">扣除医疗保险保险：</label>
+        <input type="text" id="payMedical" value="2"/>%
+    </div>
+    <div>
+        <label for="unemployment">失业保险比例：</label>
+        <input type="text" id="unemployment" value="0.2">%
+        <label for="payUnemployment">扣除失业保险：</label>
+        <input type="text" id="payUnemployment" value="0.2">%
+    </div>
+    <div>
+        <label for="workInjury">工伤保险比例：</label>
+        <input type="text" id="workInjury" value="0"/>%
+        <label for="payWorkInjury">扣除工伤保险：</label>
+        <input type="text" id="payWorkInjury" value="0"/>%
+    </div>
+    <div>
+        <label for="bear">生育保险比例：</label>
+        <input type="text" id="bear" value="0"/>%
+        <label for="payBear">扣除生育保险：</label>
+        <input type="text" id="payBear" value="0"/>%
+    </div>
+    <div>
+        <label for="housingFund">住房公积金比例：</label>
+        <input type="text" id="housingFund" value="12"/>%
+        <label for="payHousingFund">扣除住房公积金：</label>
+        <input type="text" id="payHousingFund" value="12"/>%
+    </div>
+    <div>
+        <label for="rest">扣除五险一金剩余金额：</label>
+        <input type="text" id="rest"/>
+    </div>
+    <div>
+        <label for="afterTax">扣除税剩余金额：</label>
+        <input type="text" id="afterTax"/>
+        <label for="tax">扣除税金额：</label>
+        <input type="text" id="tax"/>
+    </div>
+    <script>
+        function calc(){
+            var wage = document.getElementById('wage');
+            var ratio = document.getElementById('ratio');
+            var pension = document.getElementById('pension');
+            var payPension = document.getElementById('payPension');
+            var medical = document.getElementById('medical');
+            var payMedical = document.getElementById('payMedical');
+            var unemployment = document.getElementById('unemployment');
+            var payUnemployment = document.getElementById('payUnemployment');
+            var workInjury = document.getElementById('workInjury');
+            var payWorkInjury = document.getElementById('payWorkInjury');
+            var bear = document.getElementById('bear');
+            var payBear = document.getElementById('payBear');
+            var housingFund = document.getElementById('housingFund');
+            var payHousingFund = document.getElementById('payHousingFund');
+            var rest = document.getElementById("rest");
+            var afterTax = document.getElementById("afterTax");
+            var tax = document.getElementById("tax");
+
+            payPension.value = (wage.value * ratio.value * pension.value / 100 / 100).toFixed(2);
+            payMedical.value = (wage.value * ratio.value * medical.value / 100 / 100).toFixed(2);
+            payUnemployment.value = (wage.value * ratio.value * unemployment.value / 100 / 100).toFixed(2);
+            payWorkInjury.value = (wage.value * ratio.value * workInjury.value / 100 / 100).toFixed(2);
+            payBear.value = (wage.value * ratio.value * bear.value / 100 / 100).toFixed(2);
+            payHousingFund.value = (wage.value * ratio.value * housingFund.value / 100 / 100).toFixed(2);
+
+            rest.value = (wage.value - payPension.value - payMedical.value - payUnemployment.value - payWorkInjury.value - payBear.value - payHousingFund.value).toFixed(2);
+
+
+            var beyond = rest.value - 3500;
+            if(beyond <= 1500){
+                tax.value = (beyond * 3 / 100).toFixed(2);
+            } else if(beyond > 1500 && beyond <= 4500){
+                tax.value = (beyond * 10 / 100 - 105).toFixed(2);
+            } else if(beyond > 4500 && beyond <= 9000){
+                tax.value = (beyond * 20 / 100 - 555).toFixed(2);
+            } else if(beyond > 9000 && beyond <= 35000){
+                tax.value = (beyond * 25 / 100 - 1005).toFixed(2);
+            } else if(beyond > 35000 && beyond <= 55000){
+                tax.value = (beyond * 30 / 100 - 2775).toFixed(2);
+            } else if(beyond > 55000 && beyond <= 80000){
+                tax.value = (beyond * 35 / 100 - 5505).toFixed(2);
+            } else if(beyond > 80000){
+                tax.value = (beyond * 45 / 100 - 13505).toFixed(2);
+            }
+            afterTax.value = (rest.value - tax.value).toFixed(2);
+        }
+    </script>
+</body>
+</html>
