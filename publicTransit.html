@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>public Transit</title>
+</head>
+<body>
+    <div>
+        <label for="count">次数：</label>
+        <input type="text" id="count" onkeyup="calc()"/>
+    </div>
+    <div>
+        <label for="singleFee">单次金额：</label>
+        <input type="text" id="singleFee" onkeyup="calc()" value="0"/>
+    </div>
+    <div>
+        <label for="fee">金额：</label>
+        <input type="text" id="fee" />
+    </div>
+
+    <table id="procedure">
+
+    </table>
+
+    <script>
+        function calc(){
+            var count = parseInt(document.getElementById('count').value, 10);
+            var singleFee = parseFloat(document.getElementById('singleFee').value);
+            var fee = document.getElementById('fee');
+            var procedure = document.getElementById('procedure');
+            procedure.innerHTML = '';
+            var sum = 0.0;
+            for(var i = 0 ; i < count ; i++){
+                if(sum <= 100){
+                    sum = sum + singleFee;
+                    procedure.innerHTML += '<tr><td>' + (i+1) + '</td><td>' + sum + '</td></tr>';
+                } else if(sum > 100 && sum <= 150){
+                    sum = sum + singleFee * 0.75;
+                    procedure.innerHTML += '<tr><td>' + (i+1) + '</td><td>' + sum + '</td></tr>';
+                } else if(sum > 150){
+                    sum = sum + singleFee * 0.5;
+                    procedure.innerHTML += '<tr><td>' + (i+1) + '</td><td>' + sum + '</td></tr>';
+                }
+            }
+            fee.value = sum;
+        }
+    </script>
+</body>
+</html>
