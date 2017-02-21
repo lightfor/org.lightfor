@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Calculation of service charges</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        function fnCalc() {
+            var result = '';
+            var price = parseFloat($('#price').val());
+            if(price <= 2000000){
+                result = price + " * 0.05";
+            } else if(price > 2000000 && price <= 10000000){
+                result = '2000000 * 0.05 + ('+price+' - 2000000) * 0.03';
+            } else if(price > 10000000 && price <= 50000000){
+                result = '2000000 * 0.05 + 8000000 * 0.03 + (' + price + "- 10000000) * 0.02";
+            } else if(price > 50000000 && price <= 100000000 ){
+                result = '2000000 * 0.05 + 8000000 * 0.03 + 40000000 * 0.02 + (' + price + " - 50000000) * 0.01";
+            } else if(price > 100000000){
+                result = '2000000 * 0.05 + 8000000 * 0.03 + 40000000 * 0.02 + 50000000 * 0.01 + (' +price + " - 100000000) * 0.005";
+            }
+            $('#result').val(math.number(math.format(math.eval(result), {precision: 14})));
+        }
+    </script>`
+</head>
+<body>
+<div class="container theme-showcase">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="price" class="col-sm-2 control-label">price</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="price" placeholder="price">
+            </div>
+            <label for="result" class="col-sm-2 control-label">result</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="result" placeholder="result">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-6 col-sm-12">
+                <button type="button" class="btn btn-default" onclick="fnCalc()">Calc</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/mathjs/3.7.0/math.min.js"></script>
+</body>
+</html>
