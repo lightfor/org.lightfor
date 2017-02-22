@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Gen Fields</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        var count=1;
+
+        String.prototype.replaceAll = function(search, replacement) {
+            var target = this;
+            return target.replace(new RegExp(search, 'g'), replacement);
+        };
+
+        function fnGen() {
+            var result = '';
+            var arr = {};
+
+            result += 'OR(';
+            $('[id^=keyWords]').each(function (index) {
+                var keyWords = $(this).val().split(/[\s,\n]+/);
+                for (var i = 0; i < keyWords.length; i++) {
+                    if($.trim(keyWords[i]) != ''){
+                        var cell = $('#cell' + (index + 1)).val();
+                        var keyWord = keyWords[i];
+                        if(index == 0 && i == 0){
+                            arr[keyWord + cell] = 1;
+                            result += 'ISNUMBER(FIND("' + keyWord + '",' + cell + '))';
+                        } else if(!arr[keyWord + cell]){
+                            arr[keyWord + cell] = 1;
+                            result += ',ISNUMBER(FIND("' + keyWord + '",' + cell + '))';
+                        }
+                    }
+                }
+            });
+            result += ')';
+
+            $('#gen').val(result);
+        }
+
+        function fnAdd() {
+            $('#otherData').append($('<div>').append($('#dataZone').html().replaceAll('keyWords1','keyWords'+(count+1)).replaceAll('cell1','cell'+(count+1))).attr('id','dataZone'+count));
+            count++;
+        }
+
+        function fnDel(){
+            if(count > 1){
+                $('#dataZone' + (count-1)).remove();
+                count--;
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="container theme-showcase">
+    <form class="form-horizontal" role="form">
+        <div id="dataZone">
+            <div class="form-group">
+                <label for="keyWords1" class="col-sm-2 control-label">keyWords1</label>
+                <div class="col-sm-4">
+                    <textArea class="form-control" rows="3" name="keyWords1" id="keyWords1" placeholder="keyWords1"></textArea>
+                </div>
+                <label for="cell1" class="col-sm-2 control-label">cell1</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="cell1" placeholder="cell1">
+                </div>
+            </div>
+        </div>
+        <div id="otherData">
+
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-6 col-sm-12">
+                <button type="button" class="btn btn-default" onclick="fnGen()">Gen</button>
+                <button type="button" class="btn btn-default" onclick="fnAdd()">Add</button>
+                <button type="button" class="btn btn-default" onclick="fnDel()">Del</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="gen" class="col-sm-2 control-label">gen</label>
+            <div class="col-sm-10">
+                <textArea class="form-control" rows="3" name="gen" id="gen"></textArea>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+</html>
