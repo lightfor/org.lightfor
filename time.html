@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>time</title>
+  </head>
+  <body>
+    <h1 id="time"></h1>
+    <script>
+    function time(){
+      var time = document.getElementById('time');
+      var current = new Date();
+      time.innerHTML = current.getFullYear()+'-'+(current.getMonth()+1)+'-'+(current.getDate())+' '+current.getHours()+':'+current.getMinutes()+':'+current.getSeconds();
+      setTimeout("time()", 1000);
+    }
+    time();
+    </script>
+  </body>
+</html>
