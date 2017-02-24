@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Timing</title>
+  </head>
+  <body>
+    <label for="oldTime">计时点：</label>
+    <input id="oldTime" type="text" value="2016-10-04 14:30:00">
+    <h1 id="time"></h1>
+    <script>
+    function time(){
+      var oldTime = new Date(document.getElementById('oldTime').value);
+      var current = new Date();
+      var seconds = Number(current.getTime() - oldTime.getTime());
+      var day =  (seconds / 1000 / 60 / 60 / 24).toFixed(0);
+      var hour = (seconds / 1000 / 60 / 60 % 24).toFixed(0);
+      if(hour < 10){
+        hour = '0' + hour;
+      }
+      var minute = (seconds / 1000 / 60 % 60).toFixed(0);
+      if(minute < 10){
+        minute = '0' + minute;
+      }
+      var second = (seconds / 1000 % 60).toFixed(0);
+      if(second < 10){
+        second = '0' + second;
+      }
+      document.getElementById('time').innerHTML = day + '天' + hour + '时' + minute + '分' + second + '秒';
+      setTimeout("time()", 1000);
+    }
+    time();
+    </script>
+  </body>
+</html>
