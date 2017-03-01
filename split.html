@@ -6,6 +6,7 @@
     <title>Split</title>
 </head>
 <body>
+<div>
 <label for="data">数据：</label>
 <textarea id="data">
 .*（ 二进制流，不知道下载文件类型）	application/octet-stream	.tif	image/tiff
@@ -184,6 +185,7 @@
 <label for="result">结果：</label>
 <textarea id="result">
 </textarea>
+</div>
 
 <label for="ascii">ASCII:</label>
 <textarea id="ascii">
@@ -224,7 +226,7 @@
 <textarea id="asciiResult">
 </textarea>
 
-<label for="charExplain">字符解释</label>
+<label for="charExplain">字符解释：</label>
 <textarea id="charExplain">
 NUL 空	VT 垂直制表	SYN 空转同步
 STX 正文开始	CR 回车	CAN 作废
@@ -237,8 +239,30 @@ BS 退一格	DC3 设备控制3	RS 记录分隔符
 HT 横向列表	DC4 设备控制4	US 单元分隔符
 LF 换行	NAK 否定	DEL 删除
 </textarea>
-<label for="charExplainResult">匹配结果</label>
+<label for="charExplainResult">匹配结果：</label>
 <textarea id="charExplainResult">
+</textarea>
+
+<label for="opertator">运算符：</label>
+<textarea id="opertator">
+postfix	expr++ expr--
+unary	++expr --expr +expr -expr ~ !
+multiplicative	* / %
+additive	+ -
+shift	<< >> >>>
+relational	< > <= >= instanceof
+equality	== !=
+bitwise AND	&
+bitwise exclusive OR	^
+bitwise inclusive OR	|
+logical AND	&&
+logical OR	||
+ternary	? :
+assignment	= += -= *= /= %= &= ^= |= <<= >>= >>>=
+</textarea>
+<label for="opertatorResult">分割结果：</label>
+<textarea id="opertatorResult">
+
 </textarea>
 <script>
     var data = document.getElementById('data');
@@ -335,6 +359,15 @@ LF 换行	NAK 否定	DEL 删除
 
     }
     charExplainResult.value = resultStr;
+
+    var opertator = document.getElementById('opertator');
+    var opertatorResult = document.getElementById('opertatorResult');
+    resultStr = '';
+    rows = opertator.value.split('\n');
+    for(i = 0 ; i < rows.length; i++){
+        resultStr += '<tr><td>' + rows[i].split('	')[0] + '</td><td>' + rows[i].split('	')[1] + '</td></tr>';
+    }
+    opertatorResult.value = resultStr;
 </script>
 </body>
 </html>
