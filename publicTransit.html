@@ -29,20 +29,20 @@
             var fee = document.getElementById('fee');
             var procedure = document.getElementById('procedure');
             procedure.innerHTML = '';
-            var sum = 0.0;
+            var sum = 0;
             for(var i = 0 ; i < count ; i++){
                 if(sum <= 100){
                     sum = sum + singleFee;
-                    procedure.innerHTML += '<tr><td>' + (i+1) + '</td><td>' + sum + '</td></tr>';
+                    procedure.innerHTML += '<tr><td>' + (i+1) + '</td><td>' + sum.toFixed(2) + '</td></tr>';
                 } else if(sum > 100 && sum <= 150){
-                    sum = sum + singleFee * 0.75;
-                    procedure.innerHTML += '<tr><td>' + (i+1) + '</td><td>' + sum + '</td></tr>';
+                    sum = sum + singleFee * 0.8;
+                    procedure.innerHTML += '<tr><td>' + (i+1) + '</td><td>' + sum.toFixed(2) + '</td></tr>';
                 } else if(sum > 150){
                     sum = sum + singleFee * 0.5;
-                    procedure.innerHTML += '<tr><td>' + (i+1) + '</td><td>' + sum + '</td></tr>';
+                    procedure.innerHTML += '<tr><td>' + (i+1) + '</td><td>' + sum.toFixed(2) + '</td></tr>';
                 }
             }
-            fee.value = sum;
+            fee.value = sum.toFixed(2);
         }
     </script>
 </body>
