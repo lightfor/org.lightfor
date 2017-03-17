@@ -2,15 +2,13 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<script type="text/javascript" src="jquery.min.js"></script>
 	<script type="text/javascript">
 		function calc(){
-			//alert($('#avg').val());
-			var result = $('#result');
-			result.val('');
-			var arr = $('#data').val().split('\n');
+			var result = document.getElementById('result');
+            result.value = '';
+			var arr = document.getElementById('data').value.split('\n');
 			for(var i = 0; i < arr.length-1; i+=3){
-				result.val(result.val()+((parseFloat(arr[i])+parseFloat(arr[i+1])+parseFloat(arr[i+2]))/3)+'\n');
+				result.value = result.value +((parseFloat(arr[i])+parseFloat(arr[i+1])+parseFloat(arr[i+2]))/3)+'\n';
 			}
 		}
 	</script>
