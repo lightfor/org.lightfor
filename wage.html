@@ -54,6 +54,10 @@
         <input type="text" id="rest"/>
     </div>
     <div>
+        <label for="plusWage">附加金额：</label>
+        <input type="text" id="plusWage" value=0 onkeyup="calc()"/>
+    </div>
+    <div>
         <label for="afterTax">扣除税剩余金额：</label>
         <input type="text" id="afterTax"/>
         <label for="tax">扣除税金额：</label>
@@ -76,6 +80,7 @@
             var housingFund = document.getElementById('housingFund');
             var payHousingFund = document.getElementById('payHousingFund');
             var rest = document.getElementById("rest");
+            var plusWage = document.getElementById("plusWage");
             var afterTax = document.getElementById("afterTax");
             var tax = document.getElementById("tax");
 
@@ -89,7 +94,7 @@
             rest.value = (wage.value - payPension.value - payMedical.value - payUnemployment.value - payWorkInjury.value - payBear.value - payHousingFund.value).toFixed(2);
 
 
-            var beyond = rest.value - 3500;
+            var beyond = parseFloat(rest.value) + parseFloat(plusWage.value) - 3500;
             if(beyond <= 1500){
                 tax.value = (beyond * 3 / 100).toFixed(2);
             } else if(beyond > 1500 && beyond <= 4500){
@@ -105,7 +110,7 @@
             } else if(beyond > 80000){
                 tax.value = (beyond * 45 / 100 - 13505).toFixed(2);
             }
-            afterTax.value = (rest.value - tax.value).toFixed(2);
+            afterTax.value = (parseFloat(rest.value) + parseFloat(plusWage.value) - tax.value).toFixed(2);
         }
     </script>
 </body>
