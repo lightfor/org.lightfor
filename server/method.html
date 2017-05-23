@@ -1,0 +1,21 @@
+<html>
+<head>
+
+</head>
+<body>
+    <P><input type="button" value="testGet" id="testGet"></P>
+    <P><input type="button" value="testPost" id="testPost"></P>
+    <form id="form" method="post" action="http://online.lightfor.org/jfinal/genCodePage">
+
+    </form>
+</body>
+<script>
+    document.getElementById("testGet").addEventListener('click', function () {
+        window.location.href = "http://online.lightfor.org/jfinal/genCodePage";
+    });
+
+    document.getElementById("testPost").addEventListener("click", function(){
+        document.getElementById("form").submit();
+    })
+</script>
+</html>
