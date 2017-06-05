@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>Take Out Costs</title>
+</head>
+<body>
+<div>
+  <label for="fee">费用：</label>
+  <input id="fee" type="text">
+</div>
+<div>
+  <label for="offer">优惠：</label>
+  <input id="offer" type="text">
+</div>
+<div>
+  <label for="deliveryFee">配送费：</label>
+  <input id="deliveryFee" type="text">
+</div>
+<div>
+  <input id="calc1" type="button" value="优惠贡献算法">
+  <input id="calc2" type="button" value="优惠均摊算法">
+</div>
+<div>
+  <label for="apportion">每个人分摊：</label>
+  <input id="apportion" type="text">
+</div>
+
+<script>
+    document.getElementById('calc1').addEventListener('click', function () {
+        var fee = document.getElementById('fee').value.split(',');
+        var offer = document.getElementById('offer').value;
+        var sum = 0;
+        var result = '';
+        for(var i = 0 ; i < fee.length ; i ++){
+            sum += parseFloat(fee[i]);
+        }
+        for(i = 0 ; i < fee.length ; i ++){
+            var feeNum = parseFloat(fee[i]);
+            result +=  (feeNum - offer / sum * feeNum).toFixed(2)+',';
+        }
+        document.getElementById('apportion').value = result;
+    });
+
+    document.getElementById('calc2').addEventListener('click', function () {
+        var fee = document.getElementById('fee').value.split(',');
+        var offer = document.getElementById('offer').value/fee.length;
+        var result = '';
+        for(var i = 0 ; i < fee.length ; i ++){
+            result += (parseFloat(fee[i]) - offer) + ',';
+        }
+        document.getElementById('apportion').value = result;
+    });
+</script>
+</body>
+</html>
