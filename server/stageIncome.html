@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stage Income</title>
+</head>
+<body>
+<div>
+  <label for="money">金额：</label>
+  <input id="money" type="text">
+</div>
+<div>
+  <label for="incomeRatio">收益比例：</label>
+  <input id="incomeRatio" type="text">
+</div>
+<div>
+  <label for="stageCount">分期：</label>
+  <input id="stageCount" type="text">
+</div>
+<div>
+  <input id="calcBtn" type="button" value="计算">
+</div>
+<div>
+  <label for="income">收益：</label>
+  <input id="income" type="text">
+</div>
+<script>
+    document.getElementById('calcBtn').addEventListener('click', function () {
+        var stageCount = parseInt(document.getElementById('stageCount').value, 10);
+        var income = 0;
+        var money = parseFloat(document.getElementById('money').value);
+        var incomeRatio = parseFloat(document.getElementById('incomeRatio').value);
+        for(var i = 0 ; i < stageCount ; i++){
+          income += money * (stageCount - i) / stageCount * incomeRatio / 100 / 365 * 30;
+        }
+        document.getElementById('income').value = income.toFixed(2);
+    })
+</script>
+</body>
+</html>
