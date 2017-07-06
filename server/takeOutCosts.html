@@ -6,49 +6,53 @@
   <title>Take Out Costs</title>
 </head>
 <body>
-<div>
-  <label for="fee">费用：</label>
-  <input id="fee" type="text">
+<div style="margin: 0 auto;width: 400px;">
+  <div>
+    <label for="fee">费用：</label>
+    <input id="fee" type="text">
+  </div>
+  <div>
+    <label for="offer">优惠：</label>
+    <input id="offer" type="text">
+  </div>
+  <div>
+    <label for="deliveryFee">配送费：</label>
+    <input id="deliveryFee" type="text" value="0">
+  </div>
+  <div>
+    <input id="calc1" type="button" value="优惠贡献算法">
+    <input id="calc2" type="button" value="优惠均摊算法">
+  </div>
+  <div>
+    <label for="apportion">每个人分摊：</label>
+    <input id="apportion" type="text">
+  </div>
+  <div>
+    说明：算出个人费用英文逗号分割填入费用，优惠暂时为优惠减去配送费和餐盒费（当然你们把餐盒费加到各自的费用里，然后优惠不减也行），优惠贡献为优惠比例结算，比较合理，不会出现点多吃亏，点少赚的情况。不介意的话就用优惠均摊吧，数字可能好看点。配送费先不考虑单独计算了。
+  </div>
 </div>
-<div>
-  <label for="offer">优惠：</label>
-  <input id="offer" type="text">
-</div>
-<div>
-  <label for="deliveryFee">配送费：</label>
-  <input id="deliveryFee" type="text">
-</div>
-<div>
-  <input id="calc1" type="button" value="优惠贡献算法">
-  <input id="calc2" type="button" value="优惠均摊算法">
-</div>
-<div>
-  <label for="apportion">每个人分摊：</label>
-  <input id="apportion" type="text">
-</div>
-
 <script>
     document.getElementById('calc1').addEventListener('click', function () {
         var fee = document.getElementById('fee').value.split(',');
         var offer = document.getElementById('offer').value;
         var sum = 0;
         var result = '';
-        for(var i = 0 ; i < fee.length ; i ++){
+        for (var i = 0; i < fee.length; i++) {
             sum += parseFloat(fee[i]);
         }
-        for(i = 0 ; i < fee.length ; i ++){
+        for (i = 0; i < fee.length; i++) {
             var feeNum = parseFloat(fee[i]);
-            result +=  (feeNum - offer / sum * feeNum).toFixed(2)+',';
+            result += (feeNum - offer / sum * feeNum).toFixed(2) + ',';
         }
         document.getElementById('apportion').value = result;
     });
 
     document.getElementById('calc2').addEventListener('click', function () {
         var fee = document.getElementById('fee').value.split(',');
-        var offer = document.getElementById('offer').value/fee.length;
+        var offer = document.getElementById('offer').value / fee.length;
         var result = '';
-        for(var i = 0 ; i < fee.length ; i ++){
-            result += (parseFloat(fee[i]) - offer) + ',';
+        for (var i = 0; i < fee.length; i++) {
+            result += (fee[i] - offer).toFixed(2) + ',';
         }
         document.getElementById('apportion').value = result;
     });
