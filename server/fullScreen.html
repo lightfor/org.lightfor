@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Take Out Costs</title>
+</head>
+
+<body>
+    <div id="test">
+        <p>test</p>
+    </div>
+    <input type="button" onclick="fullScreen()" value="全屏" />
+</body>
+
+<script>
+    function fullScreen() {
+        var element = document.getElementById('test');
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        } else if (element.msRequestFullscreen) {
+            element.msRequestFullscreen();
+        } else if (element.webkitRequestFullscreen) {
+            element.webkitRequestFullScreen();
+        }
+    }
+</script>
+
+
+</html>
