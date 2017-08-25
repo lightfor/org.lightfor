@@ -19,7 +19,7 @@
 </div>
 <script>
     function random() {
-        var data = document.getElementById('data').value.trim().split(/\s+/);
+        var data = document.getElementById('data').value.trim().split(/\n+/);
         var i = Math.floor(Math.random() * data.length);
         console.log(i);
         document.getElementById('result').innerText = data[i];
