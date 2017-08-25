@@ -18,11 +18,20 @@
   </div>
 </div>
 <script>
+    var selected = [];
+
     function random() {
         var data = document.getElementById('data').value.trim().split(/\n+/);
         var i = Math.floor(Math.random() * data.length);
-        console.log(i);
-        document.getElementById('result').innerText = data[i];
+        if( selected.indexOf(i) === -1){
+            selected.push(i);
+            document.getElementById('result').innerText = data[i];
+        } else if(selected.length === data.length){
+            document.getElementById('result').innerText = '';
+        } else {
+            random();
+        }
+
     }
 </script>
 </body>
