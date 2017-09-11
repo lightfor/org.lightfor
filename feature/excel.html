@@ -29,10 +29,10 @@
             $('[id^=keyWords]').each(function (index) {
                 var keyWords = $(this).val().split(/[\s,\n]+/);
                 for (var i = 0; i < keyWords.length; i++) {
-                    if($.trim(keyWords[i]) != ''){
+                    if($.trim(keyWords[i]) !== ''){
                         var cell = $('#cell' + (index + 1)).val();
                         var keyWord = keyWords[i];
-                        if(index == 0 && i == 0){
+                        if(index === 0 && i === 0){
                             arr[keyWord + cell] = 1;
                             result += 'ISNUMBER(FIND("' + keyWord + '",' + cell + '))';
                         } else if(!arr[keyWord + cell]){
