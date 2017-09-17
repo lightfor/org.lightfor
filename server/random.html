@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>Random</title>
+</head>
+<body>
+<div style="margin: 0 auto;width: 400px;">
+  <div>
+    <textarea id="data" rows="20" cols="20"></textarea>
+  </div>
+  <div>
+    <input onclick="random()" value="选取" type="button">
+  </div>
+  <div>
+    <h1 id="result"></h1>
+  </div>
+</div>
+<script>
+    var selected = [];
+
+    function random() {
+        var data = document.getElementById('data').value.trim().split(/\n+/);
+        var i = Math.floor(Math.random() * data.length);
+        if( selected.indexOf(i) === -1){
+            selected.push(i);
+            document.getElementById('result').innerText = data[i];
+        } else if(selected.length === data.length){
+            document.getElementById('result').innerText = '';
+        } else {
+            random();
+        }
+
+    }
+</script>
+</body>
+</html>

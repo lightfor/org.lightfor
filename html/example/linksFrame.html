@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>Links Frame</title>
+</head>
+<body>
+  <a href="http://lightfor.org" target="_self">self</a>
+  <a href="http://lightfor.org" target="_parent">parent</a>
+  <a href="http://lightfor.org" target="_top">top</a>
+  <iframe id="frame">
+  </iframe>
+
+<script>
+  document.getElementById('frame').src='linksFrame.html';
+  //document.getElementById('frame').src='linksFrame.html?'+Math.random();
+</script>
+</body>
+</html>

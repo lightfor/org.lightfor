@@ -3,10 +3,10 @@ var filter = function () {
     var trs = document.getElementsByTagName('tr');
     for (var i = 1; i < trs.length; i++) {
         var tr = trs[i];
-        if (tr.innerText.indexOf(keyWord) == -1) {
+        if (tr.innerText.indexOf(keyWord) === -1) {
             tr.style.display = 'none';
         } else {
             tr.style.display = '';
         }
     }
-}
+};

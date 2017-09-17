@@ -31,13 +31,13 @@
                     html += '<tr>';
                     for (j = 0; j < ceil.length; j++) {
                         if (!/^\s*$/.test(ceil[j])) {
-                            if (compare == '<') {
+                            if (compare === '<') {
                                 html += '<td>' + ( parseFloat(ceil[j]) < value ? '<span class="red">' + ceil[j] + '</span>' : ceil[j] ) + '</td>';
-                            } else if (compare == '<=') {
+                            } else if (compare === '<=') {
                                 html += '<td>' + ( parseFloat(ceil[j]) <= value ? '<span class="red">' + ceil[j] + '</span>' : ceil[j] ) + '</td>';
-                            } else if (compare == '>') {
+                            } else if (compare === '>') {
                                 html += '<td>' + ( parseFloat(ceil[j]) > value ? '<span class="red">' + ceil[j] + '</span>' : ceil[j] ) + '</td>';
-                            } else if (compare == '>=') {
+                            } else if (compare === '>=') {
                                 html += '<td>' + ( parseFloat(ceil[j]) >= value ? '<span class="red">' + ceil[j] + '</span>' : ceil[j] ) + '</td>';
                             }
                         }
