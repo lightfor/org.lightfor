@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>responsive</title>
+    <style>
+        .left, .main, .right {
+            box-sizing: border-box;
+        }
+
+        .left {
+            background-color: #2196F3;
+            padding: 20px;
+            float: left;
+            width: 20%; /*The width is 20%, by default*/
+        }
+
+        .main {
+            background-color: #f1f1f1;
+            padding: 20px;
+            float: left;
+            width: 60%; /*The width is 60%, by default*/
+        }
+
+        .right {
+            background-color: #4CAF50;
+            padding: 20px;
+            float: left;
+            width: 20%; /*The width is 20%, by default*/
+        }
+
+        /*Use a media query to add a break point at 800px:*/
+        @media (max-width: 800px) {
+            .left, .main, .right {
+                width: 100%; /*The width is 100%, when the viewport is 800px or smaller*/
+            }
+        }
+    </style>
+</head>
+
+<body>
+<img src="img_girl.jpg" style="width:100%; max-width: 100%; height: auto">
+<picture>
+    <source srcset="img_smallflower.jpg" media="(max-width: 600px)">
+    <source srcset="img_flowers.jpg" media="(max-width: 1500px)">
+    <source srcset="flowers.jpg">
+    <img src="img_smallflower.jpg" alt="Flowers">
+</picture>
+<h1 style="font-size:10vw">Hello World</h1>
+
+<div class="left">
+    Left Menu<br><br><br><br>
+</div>
+<div class="main">
+    Main Content<br><br><br><br>
+</div>
+<div class="right">
+    Right Content<br><br><br><br>
+</div>
+</body>
+</html>
