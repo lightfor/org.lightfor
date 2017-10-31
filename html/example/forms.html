@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>forms</title>
+</head>
+<body>
+<form id="form1" accept-charset="UTF-8" action="/" autocomplete="on" enctype="application/x-www-form-urlencoded" method="get"
+      novalidate="novalidate" target="_self" oninput="x.value=parseInt(a.value)+parseInt(b.value)">
+    <fieldset>
+        <legend>Personal information:</legend>
+        First name:
+        <br>
+        <label>
+            <input type="text" name="firstname" value="Mickey" autofocus="autofocus" required="required">
+        </label>
+        <br>
+        Last name:
+        <br>
+        <label>
+            <input type="text" name="lastname" value="Mouse" size="40">
+        </label>
+        <br>
+        User password:
+        <br>
+        <label>
+            <input type="password" name="psw">
+        </label>
+        <br>
+        Country code: <input type="text" name="country_code" pattern="[A-Za-z]{3}" title="Three letter country code">
+        <br>
+        <label>
+            <input type="radio" name="gender" value="male" checked>Male<br>
+            <input type="radio" name="gender" value="female"> Female<br>
+            <input type="radio" name="gender" value="other"> Other<br>
+        </label>
+        <label>
+            <input type="checkbox" name="vehicle1" value="Bike"> I have a bike<br>
+            <input type="checkbox" name="vehicle2" value="Car"> I have a car<br>
+        </label>
+        <label>
+            <input list="browsers">list attribute refer to the id attribute
+        </label>
+        <datalist id="browsers">
+            <option value="Internet Explorer">
+            <option value="Firefox">
+            <option value="Chrome">
+            <option value="Opera">
+            <option value="Safari">
+        </datalist>
+        <br>
+        0
+        <label for="a"></label><input type="range" id="a" name="a" value="50">
+        100 +
+        <label for="b"></label><input type="number" id="b" name="b" value="50">
+        =
+        <output name="x" for="a b"></output>
+        <br>
+        <label>
+            <select name="cars" size="3" multiple>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="fiat">Fiat</option>
+                <option value="audi">Audi</option>
+            </select>
+        </label>
+        <br>
+        <label>
+            <select>
+                <optgroup label="Swedish Cars">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                </optgroup>
+                <optgroup label="German Cars">
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                </optgroup>
+            </select>
+        </label>
+        <br>
+        <label>
+            <input type="color">
+        </label>
+        <br>
+        <label>
+            <input type="date" max="1979-12-31">
+        </label>
+        <br>
+        <label>
+            <input type="datetime-local">
+        </label>
+        <br>
+        <label>
+            <input type="email">change keyboard
+        </label>
+        <br>
+        <label>
+            <input type="month">
+        </label>
+        <br>
+        <label>
+            <input type="number" min="1" max="5" step="2">
+        </label>
+        <br>
+        <label>
+            <input type="search">
+        </label>
+        <br>
+        <label>
+            <input type="tel">
+        </label>
+        <br>
+        <label>
+            <input type="time">
+        </label>
+        <br>
+        <label>
+            <input type="url">
+        </label>
+        <br>
+        <label>
+            <input type="week">
+        </label>
+        <br>
+        <br>
+        <input type="button" onclick="alert('Hello World!')" value="Click Me!">
+        <input type="submit" value="Submit">
+        <input type="submit" formaction="/"
+               value="Submit as admin">
+        <input type="submit" formenctype="multipart/form-data"
+               value="Submit as Multipart/form-data">
+        <input type="submit" formmethod="post" value="Submit using POST">
+        <input type="submit" formnovalidate value="Submit without validation">
+        <input type="submit" formtarget="_blank"
+               value="Submit to a new window">
+        <input type="reset">
+    </fieldset>
+</form>
+
+<input type="text" name="midName" form="form1" placeholder="midName">
+</body>
+</html>
