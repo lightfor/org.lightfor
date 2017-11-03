@@ -95,7 +95,9 @@
 
 
             var beyond = parseFloat(rest.value) + parseFloat(plusWage.value) - 3500;
-            if(beyond <= 1500){
+            if(beyond <= 0){
+                tax.value = 0;
+            } else if(beyond <= 1500){
                 tax.value = (beyond * 3 / 100).toFixed(2);
             } else if(beyond > 1500 && beyond <= 4500){
                 tax.value = (beyond * 10 / 100 - 105).toFixed(2);
